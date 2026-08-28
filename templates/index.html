@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Language Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="background-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fa-solid fa-language"></i> AI Language Translator</h1>
+            <p>Translate text instantly between multiple languages</p>
+        </header>
+
+        <div class="translator-box">
+
+            <div class="lang-selectors">
+                <select id="sourceLang">
+                    <option value="auto">Detect Language</option>
+                    {% for name, code in languages.items() %}
+                        <option value="{{ code }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+
+                <button id="swapBtn" title="Swap Languages">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                </button>
+
+                <select id="targetLang">
+                    {% for name, code in languages.items() %}
+                        <option value="{{ code }}" {% if code == 'ur' %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="text-areas">
+                <div class="text-box">
+                    <textarea id="inputText" placeholder="Type text here..."></textarea>
+                    <div class="box-footer">
+                        <span id="charCount">0 characters</span>
+                        <button id="speakInput" title="Listen"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+
+                <div class="text-box output-box">
+                    <textarea id="outputText" placeholder="Translation will appear here..." readonly></textarea>
+                    <div class="box-footer">
+                        <button id="copyBtn" title="Copy"><i class="fa-regular fa-copy"></i> Copy</button>
+                        <button id="speakOutput" title="Listen"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="translateBtn">
+                <i class="fa-solid fa-language"></i> Translate
+            </button>
+
+            <div id="loader" class="loader hidden"></div>
+        </div>
+
+        <footer>
+            <p>Made with <i class="fa-solid fa-heart"></i> — CodeAlpha AI Internship | Task 1</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
